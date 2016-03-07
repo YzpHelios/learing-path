@@ -1,0 +1,54 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<title>index</title>
+	<style>
+       .one {
+       	color: red;
+       } 
+       .two {
+       	 font-size: 50px;
+       }
+       .three {
+       	text-align: center;
+       }
+	</style>
+</head>
+<body>
+     <p id="pd" id="styll" class="one two three">boss yuan is a  good man</p>
+     
+     <script>
+     /* 从div的多个类名中删除不想要的类，原始方法 */
+        var pd = document.getElementById("pd");
+     	var classNames = pd.className.split(/\s+/);
+     	var pos = -1,
+     		i,
+     		len;
+     	for(i = 0,len = classNames.length;i < len; i++){
+     		if(classNames[i] == "one"){
+     			pos = i;
+     			break;
+     		}
+     	}
+     	classNames.splice(i, 1);
+     	pd.className = classNames.join(" ");
+     /*HTML5 删除某个类的方法*/
+     	pd.classList.remove("user");
+
+     /*HTML5 添加某个类的方法*/
+     	pd.classList.add("four");
+
+     /*HTML5 切换某个类*/
+     	pd.classList.toggle("five");
+     /*HTML5 确定元素中是否包含既定类名*/
+     	if (div.classList.contains("one") && !div.classList.contains("disabled")) {
+     		//执行操作
+     	}
+     /*迭代类名*/
+        for (var i = 0; len = pd.classList.length; i < len; i++){
+        	doSonmething(pd.classList[i]);
+        }
+
+     </script>
+</body>
+</html>
