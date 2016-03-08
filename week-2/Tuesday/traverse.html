@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="div1">
+		<p><b>hello</b> world</p>
+		<ul>
+			<li>one item</li>
+			<li>one item</li>
+			<li>one item</li>
+			<li>one item</li>
+			<li>one item</li>
+		</ul>
+	</div>
+	<script>
+		/*遍历#div1中所有元素  事例1 */
+		/*NodeIterator类型
+		*createNodeIterator()方法，四个参数为
+		*root：想要作为搜索起点的树中的节点
+		*whatToShow：表示要访问哪些节点的数字代码
+		*filter:是一个filter对象，或者表示一个应该接受还是拒绝某种特定
+		*entityReferenceExpansion：布尔值，表示是否要扩展尸体引用。（在html页面中没有用，因为其中的尸体引用不能扩展
+		*/
+		var div = document.getElementById("div1");
+		var iterator = document.createNodeIterator(div, NodeFilter.SHOW_ELEMENT,null,false);
+		var node = iterator.nextNode();
+		while(node !== null){
+			alert(node.tagName);
+			node = iterator.nextNode();
+		}
+
+		/*返回遍历中遇到的某个元素，添加过滤器*/
+		var div = document.getElementById("div1");
+
+		// 过滤器
+		var filter = function(node) {
+			return node.tagName.toLowerCase() == "li"? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+		};
+
+		var iterator = document.createNodeIterator(div, NodeFilter.SHOW_ELEMENT, filter, false);
+		var node = iterator.nextNode();
+		while(node !== null) {
+			alert(node.tagName);
+			node = iterator.nextNode();
+		}
+		/*TreeWalker类型
+		*parentNode():遍历当前节点父节点
+		*firstChild():遍历当前节点的第一个子节点
+		*lastChild():遍历当前节点的最后一个子节点
+		*nextSibling()：遍历当前及节点的下一个同辈节点
+		*previousSibling():遍历当前节点的上一个同辈节点
+		*/
+		var div = document.getElementById("div1");
+		var walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, null, false);
+
+		// 转到<p>
+		walker.firstChild(); 
+		//转到<ul>
+		walker.nextSibling(); 
+
+		var node = walker.firstChild();
+		while (node !== null) {
+			alert(node.tagName);
+			node = walker.nextSibling();
+		}
+	</script>
+</body>
+</html>
